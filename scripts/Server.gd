@@ -47,9 +47,11 @@ func _on_image_sender_timer_timeout():
 	# Capture the current view
 	await RenderingServer.frame_post_draw
 	var img = get_viewport().get_texture().get_image()
+	
+	# Remove alpha channel and convert to grayscale
+	img.convert(Image.FORMAT_L8) # Helps reduce size
 
 	# Resize the image
-	img.shrink_x2()
 	img.shrink_x2()
 	img.shrink_x2()
 	print("Image size: ", img.get_width(), " x ", img.get_height())
